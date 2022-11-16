@@ -26,7 +26,7 @@ body {
   margin-bottom: calc(50vh - 200px);
   box-sizing: border-box;
   text-align: center;
-  &__header-difficalty {
+  &__header-difficulty {
     width: 208px;
     font-style: normal;
     font-weight: 400;
@@ -38,7 +38,7 @@ body {
     padding-top: 52px;
     margin: auto;
   }
-  &__difficalty {
+  &__difficulty {
     display: flex;
     flex-direction: row;
     justify-content: center;
