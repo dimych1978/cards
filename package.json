@@ -1,0 +1,30 @@
+{
+  "name": "dt_1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write ./src/",
+    "stylelint": "stylelint ./src/**/*.css && stylelint ./src/**/*.scss",
+    "stylelint:fix": "stylelint ./src/**/*.css --fix && stylelint ./src/**/*.scss --fix",
+    "lint:js": "eslint ./src/**/*.js",
+    "lint": "npm run stylelint && npm run stylelint:fix && npm run lint:js",
+    "prepare": "husky install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^8.0.2",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.8.0",
+    "stylelint": "^14.15.0",
+    "stylelint-config-prettier": "^9.0.4",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-standard": "^29.0.0",
+    "stylelint-order": "^5.0.0",
+    "stylelint-prettier": "^2.0.0",
+    "stylelint-scss": "^4.3.0"
+  }
+}
