@@ -1,13 +1,12 @@
 const cards = document.querySelector('.cards');
 const difficulty = document.querySelector('.cards__difficulty');
+const buttonPlayGame = document.querySelector('.cards__start-button');
 
 difficulty.addEventListener('click', (event) => {
   event.preventDefault();
   const target = event.target;
     console.log(target);
   if (target.dataset.name == 1) {
-    const levelEasy = new LevelEasy(document.querySelector('.level-easy'));
-    console.log(levelEasy);
     window.application.screens['easy'] = renderEasyScreen;
     window.application.renderScreen('easy');
   } else if (target.dataset.name == 2) {
@@ -22,4 +21,13 @@ difficulty.addEventListener('click', (event) => {
     window.application.renderScreen('hard');
 }
 });
+console.log(buttonPlayGame);
+buttonPlayGame.addEventListener('click', (event) => {
+  event.preventDefault();
+  const target = event.target;
+  window.application.screens['allScreen'] = renderALLScreen;
+  window.application.renderScreen('allScreen');
+});
+
+
 

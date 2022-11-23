@@ -14,7 +14,7 @@ body {
   background: #004980;
 }
 .cards {
-  width: 480px;
+  width: 1024px;
   height: 459px;
   left: 272px;
   top: 158px;
@@ -67,15 +67,94 @@ body {
     font-weight: 400;
     font-size: 24px;
     line-height: 32px;
-    color: #FFFFFF;
+    color: #ffffff;
     width: 246px;
     height: 50px;
     left: 389px;
     top: 519px;
-    background: #7AC100;
+    background: #7ac100;
     border-radius: 12px;
     justify-content: center;
     align-items: center;
     margin-top: 67px;
+  }
+  &__shirts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  &__faces {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+}
+.level {
+  &__easy {
+    &-screen {
+      padding: 22px;
+    }
+  }
+}
+.button__restart {
+  width: 246px;
+  height: 48px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  color: #ffffff;
+  background: #7ac100;
+  border-radius: 12px;
+  justify-content: center;
+  margin-top: 24px;
+}
+.time {
+  width: 155px;
+  height: 72px;
+  left: 22px;
+  top: 41px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 72px;
+  color: #ffffff;
+  &__bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 35px;
+  }
+  &__self {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-items: end;
+    &-label {
+      width: 28px;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 32px;
+      font-feature-settings: 'pnum' on, 'lnum' on;
+      color: #ffffff;
+    }
+    &-data {
+      font-size: 64px;
+      line-height: 48px;
+      color: #ffffff;
+    }
+  }
+}
+.img {
+  &-back {
+    width: 95px;
+    height: 133px;
+    border-radius: 4px;
+  }
+  &-face {
+    width: 95px;
+    height: 133px;
+    border-radius: 4px;
   }
 }
