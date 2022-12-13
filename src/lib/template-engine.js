@@ -1,4 +1,4 @@
-function templateEngine( block )
+export function templateEngine( block )
 {
     if ( block === undefined || block === null || block === false )
     { return document.createTextNode( '' ) };
@@ -28,7 +28,7 @@ function templateEngine( block )
             element.setAttribute(key, block.attrs[key]))
     }
     
-    content = templateEngine( block.content );
+    const content = templateEngine( block.content );
     element.appendChild( content );
     return element;
 

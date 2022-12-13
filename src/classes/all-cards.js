@@ -1,4 +1,8 @@
-class AllCards {
+import { templateEngine } from '../lib/template-engine';
+import { arrayOfCards } from '../array-card-faces';
+
+
+export class AllCards {
   constructor(element) {
     if (!(element instanceof HTMLElement)) {
       console.log(element);
@@ -11,44 +15,6 @@ class AllCards {
   renderAllCards() {
     this.allCards = templateEngine(AllCards.template());
     document.body.appendChild(this.allCards);
-    const arrayOfCards = [
-      'src/img/6_Clubs.svg',
-      'src/img/7_Clubs.svg',
-      'src/img/8_Clubs.svg',
-      'src/img/9_Clubs.svg',
-      'src/img/10_Clubs.svg',
-      'src/img/J_Clubs.svg',
-      'src/img/Q_Clubs.svg',
-      'src/img/K_Clubs.svg',
-      'src/img/A_Clubs.svg',
-      'src/img/6_Diamonds.svg',
-      'src/img/7_Diamonds.svg',
-      'src/img/8_Diamonds.svg',
-      'src/img/9_Diamonds.svg',
-      'src/img/10_Diamonds.svg',
-      'src/img/J_Diamonds.svg',
-      'src/img/Q_Diamonds.svg',
-      'src/img/K_Diamonds.svg',
-      'src/img/A_Diamonds.svg',
-      'src/img/6_Hearts.svg',
-      'src/img/7_Hearts.svg',
-      'src/img/8_Hearts.svg',
-      'src/img/9_Hearts.svg',
-      'src/img/10_Hearts.svg',
-      'src/img/J_Hearts.svg',
-      'src/img/Q_Hearts.svg',
-      'src/img/A_Hearts.svg',
-      'src/img/A_Hearts.svg',
-      'src/img/6_Spades.svg',
-      'src/img/7_Spades.svg',
-      'src/img/8_Spades.svg',
-      'src/img/9_Spades.svg',
-      'src/img/10_Spades.svg',
-      'src/img/J_Spades.svg',
-      'src/img/Q_Spades.svg',
-      'src/img/K_Spades.svg',
-      'src/img/A_Spades.svg',
-    ];
     const cardFace = document.querySelector('.cards__faces');
     console.log(cardFace);
 
@@ -56,7 +22,6 @@ class AllCards {
       this.faceBack = templateEngine(AllCards.faceBackTemplate(count));
       for (const key in arrayOfCards) {
         if (key === this.faceBack.name) {
-          console.log(arrayOfCards[count]);
           cardFace.appendChild(this.faceBack);
           this.faceBack.setAttribute(
             'style',

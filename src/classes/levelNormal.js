@@ -1,4 +1,7 @@
-class LevelNormal {
+import { templateEngine } from '../lib/template-engine';
+
+
+export class LevelNormal {
     constructor(element) {
       if (!(element instanceof HTMLElement)) {
         throw new Error('Это не HTML-элемент');
@@ -9,7 +12,6 @@ class LevelNormal {
       this.element.addEventListener('click', this.renderLevelNormal);
     }
     renderLevelNormal() {
-      console.log('renderLevelNormal');
       this.levelNormal = templateEngine(LevelNormal.levelTemplate());
       document.body.appendChild(this.levelNormal);
     }
