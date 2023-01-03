@@ -1,13 +1,13 @@
 import { templateEngine } from '../lib/template-engine';
-import { AllCards } from './all-cards';
 import { arrayOfCards } from '../array-card-faces';
 import { comparison } from '..';
 import { randomCard } from '..';
 import { renderScreen } from '../screens/screen';
 import { compare } from 'specificity';
 import { clearConfigCache } from 'prettier';
+import { count } from 'rxjs';
 
-export class LevelEasy {
+export class LevelRender {
   constructor(element) {
     if (!(element instanceof HTMLElement)) {
       console.log(element);
@@ -15,20 +15,20 @@ export class LevelEasy {
     }
     this.element = element;
     this.arrForCompare = [];
-    this.renderLevelEasy = this.renderLevelEasy.bind(this);
-    this.renderLevelEasy();
+    this.renderLevelRender = this.renderLevelRender.bind(this);
+    this.renderLevelRender();
     const cards = document.querySelector('.cards__shirts');
     this.showCard = this.showCard.bind(this);
     this.compare = this.compare.bind(this);
     cards.addEventListener('click', this.showCard);
   }
-  renderLevelEasy() {
-    this.levelEasy = templateEngine(LevelEasy.levelTemplate());
-    document.body.appendChild(this.levelEasy);
+  renderLevelRender() {
+    this.levelRender = templateEngine(LevelRender.levelTemplate());
+    document.body.appendChild(this.levelRender);
     const cardShirt = document.querySelector('.cards__shirts');
     comparison();
     for (let count = 0; count < window.application.difficult; count++) {
-      this.shirtBack = templateEngine(LevelEasy.ShirtBackTemplate(count));
+      this.shirtBack = templateEngine(LevelRender.ShirtBackTemplate(count));
       cardShirt.appendChild(this.shirtBack);
     }
     const imgBack = cardShirt.querySelectorAll('.img-back');
@@ -55,7 +55,6 @@ export class LevelEasy {
   showCard(event) {
     event.preventDefault();
     const targetOfShowCard = event.target;
-    this.arrForCompare.push(randomCard[targetOfShowCard.name]);
 
     targetOfShowCard.setAttribute(
       'style',
@@ -63,14 +62,18 @@ export class LevelEasy {
         arrayOfCards[randomCard[targetOfShowCard.name] - 1]
       })`
     );
-    const cards = document.querySelector('.cards__shirts');
-    cards.addEventListener('click', (event) => {
+    const cardsNext = document.querySelector('.cards__shirts');
+    this.arrForCompare.push(randomCard[targetOfShowCard.name]);
+
+    cardsNext.addEventListener('click', (event) => {
       if (event.target.name === targetOfShowCard.name) {
-        renderScreen(this);
-      } else {
-        this.compare(event);
+        const scoreboard = document.querySelector('.level__easy-screen');
+        cards.remove();
+        scoreboard.remove();
+        renderScreen();
       }
     });
+    this.compare(event);
   }
 
   compare(event) {
@@ -80,15 +83,24 @@ export class LevelEasy {
       'style',
       `background-image: url(${arrayOfCards[randomCard[target.name] - 1]})`
     );
-    if (this.arrForCompare[0] === this.arrForCompare[1]) {
-      alert('Вы победили');
+
+    if (this.arrForCompare.length % 2 === 1) {
+      return;
     } else {
-      alert('Вы проиграли');
+      let index = this.arrForCompare.length;
+      if (this.arrForCompare[index - 2] !== randomCard[target.name]) {
+        alert('Вы проиграли');
+      }
+    }
+
+    if (this.arrForCompare.length === window.application.difficult) {
+      alert('Вы победили');
+      return;
     }
   }
 }
 
-LevelEasy.levelTemplate = () => ({
+LevelRender.levelTemplate = () => ({
   tag: 'section',
   cls: 'level__easy-screen',
   content: [
@@ -119,7 +131,7 @@ LevelEasy.levelTemplate = () => ({
     },
   ],
 });
-LevelEasy.ShirtBackTemplate = (count) => ({
+LevelRender.ShirtBackTemplate = (count) => ({
   tag: 'img',
   cls: 'img-back',
   attrs: {

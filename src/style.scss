@@ -82,6 +82,9 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
+    justify-content: center;
+    padding-left: 180px;
+    padding-right: 180px;
   }
   &__faces {
     display: flex;

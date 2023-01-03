@@ -381,8 +381,9 @@ class AllCards {
       console.log(element);
       throw new Error('Это не HTML-элемент');
     }
-    this.element = element;
+    this.element = element; 
     this.renderAllCards = this.renderAllCards.bind(this);
+    console.log('object');
     this.renderAllCards();
   }
   renderAllCards() {
@@ -454,25 +455,24 @@ AllCards.faceBackTemplate = (count) => ({
 
 /***/ }),
 
-/***/ "./src/classes/levelEasy.js":
-/*!**********************************!*\
-  !*** ./src/classes/levelEasy.js ***!
-  \**********************************/
+/***/ "./src/classes/level-render.js":
+/*!*************************************!*\
+  !*** ./src/classes/level-render.js ***!
+  \*************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "LevelEasy": () => (/* binding */ LevelEasy)
+/* harmony export */   "LevelRender": () => (/* binding */ LevelRender)
 /* harmony export */ });
 /* harmony import */ var _lib_template_engine__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/template-engine */ "./src/lib/template-engine.js");
-/* harmony import */ var _all_cards__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./all-cards */ "./src/classes/all-cards.js");
-/* harmony import */ var _array_card_faces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../array-card-faces */ "./src/array-card-faces.js");
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! .. */ "./src/index.js");
-/* harmony import */ var _screens_screen__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../screens/screen */ "./src/screens/screen.js");
-/* harmony import */ var specificity__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! specificity */ "./node_modules/specificity/dist/specificity.mjs");
-/* harmony import */ var prettier__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! prettier */ "./node_modules/prettier/standalone.js");
-/* harmony import */ var prettier__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(prettier__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _array_card_faces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../array-card-faces */ "./src/array-card-faces.js");
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! .. */ "./src/index.js");
+/* harmony import */ var _screens_screen__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../screens/screen */ "./src/screens/screen.js");
+/* harmony import */ var specificity__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! specificity */ "./node_modules/specificity/dist/specificity.mjs");
+/* harmony import */ var prettier__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prettier */ "./node_modules/prettier/standalone.js");
+/* harmony import */ var prettier__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prettier__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
@@ -482,7 +482,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class LevelEasy {
+class LevelRender {
   constructor(element) {
     if (!(element instanceof HTMLElement)) {
       console.log(element);
@@ -490,20 +490,20 @@ class LevelEasy {
     }
     this.element = element;
     this.arrForCompare = [];
-    this.renderLevelEasy = this.renderLevelEasy.bind(this);
-    this.renderLevelEasy();
+    this.renderLevelRender = this.renderLevelRender.bind(this);
+    this.renderLevelRender();
     const cards = document.querySelector('.cards__shirts');
     this.showCard = this.showCard.bind(this);
     this.compare = this.compare.bind(this);
     cards.addEventListener('click', this.showCard);
   }
-  renderLevelEasy() {
-    this.levelEasy = (0,_lib_template_engine__WEBPACK_IMPORTED_MODULE_0__.templateEngine)(LevelEasy.levelTemplate());
-    document.body.appendChild(this.levelEasy);
+  renderLevelRender() {
+    this.levelRender = (0,_lib_template_engine__WEBPACK_IMPORTED_MODULE_0__.templateEngine)(LevelRender.levelTemplate());
+    document.body.appendChild(this.levelRender);
     const cardShirt = document.querySelector('.cards__shirts');
-    (0,___WEBPACK_IMPORTED_MODULE_3__.comparison)();
+    (0,___WEBPACK_IMPORTED_MODULE_2__.comparison)();
     for (let count = 0; count < window.application.difficult; count++) {
-      this.shirtBack = (0,_lib_template_engine__WEBPACK_IMPORTED_MODULE_0__.templateEngine)(LevelEasy.ShirtBackTemplate(count));
+      this.shirtBack = (0,_lib_template_engine__WEBPACK_IMPORTED_MODULE_0__.templateEngine)(LevelRender.ShirtBackTemplate(count));
       cardShirt.appendChild(this.shirtBack);
     }
     const imgBack = cardShirt.querySelectorAll('.img-back');
@@ -511,11 +511,11 @@ class LevelEasy {
     function shuffle(array) {
       array.sort(() => Math.random() - 0.5);
     }
-    shuffle(___WEBPACK_IMPORTED_MODULE_3__.randomCard);
+    shuffle(___WEBPACK_IMPORTED_MODULE_2__.randomCard);
     imgBack.forEach((img) => {
       img.setAttribute(
         'style',
-        `background-image: url(${_array_card_faces__WEBPACK_IMPORTED_MODULE_2__.arrayOfCards[___WEBPACK_IMPORTED_MODULE_3__.randomCard[img.name] - 1]})`
+        `background-image: url(${_array_card_faces__WEBPACK_IMPORTED_MODULE_1__.arrayOfCards[___WEBPACK_IMPORTED_MODULE_2__.randomCard[img.name] - 1]})`
       );
     });
     setTimeout(() => {
@@ -530,22 +530,25 @@ class LevelEasy {
   showCard(event) {
     event.preventDefault();
     const targetOfShowCard = event.target;
-    this.arrForCompare.push(___WEBPACK_IMPORTED_MODULE_3__.randomCard[targetOfShowCard.name]);
 
     targetOfShowCard.setAttribute(
       'style',
       `background-image: url(${
-        _array_card_faces__WEBPACK_IMPORTED_MODULE_2__.arrayOfCards[___WEBPACK_IMPORTED_MODULE_3__.randomCard[targetOfShowCard.name] - 1]
+        _array_card_faces__WEBPACK_IMPORTED_MODULE_1__.arrayOfCards[___WEBPACK_IMPORTED_MODULE_2__.randomCard[targetOfShowCard.name] - 1]
       })`
     );
-    const cards = document.querySelector('.cards__shirts');
-    cards.addEventListener('click', (event) => {
+    const cardsNext = document.querySelector('.cards__shirts');
+    this.arrForCompare.push(___WEBPACK_IMPORTED_MODULE_2__.randomCard[targetOfShowCard.name]);
+
+    cardsNext.addEventListener('click', (event) => {
       if (event.target.name === targetOfShowCard.name) {
-        (0,_screens_screen__WEBPACK_IMPORTED_MODULE_4__.renderScreen)(this);
-      } else {
-        this.compare(event);
+        const scoreboard = document.querySelector('.level__easy-screen');
+        cards.remove();
+        scoreboard.remove();
+        (0,_screens_screen__WEBPACK_IMPORTED_MODULE_3__.renderScreen)();
       }
     });
+    this.compare(event);
   }
 
   compare(event) {
@@ -553,17 +556,26 @@ class LevelEasy {
     const target = event.target;
     target.setAttribute(
       'style',
-      `background-image: url(${_array_card_faces__WEBPACK_IMPORTED_MODULE_2__.arrayOfCards[___WEBPACK_IMPORTED_MODULE_3__.randomCard[target.name] - 1]})`
+      `background-image: url(${_array_card_faces__WEBPACK_IMPORTED_MODULE_1__.arrayOfCards[___WEBPACK_IMPORTED_MODULE_2__.randomCard[target.name] - 1]})`
     );
-    if (this.arrForCompare[0] === this.arrForCompare[1]) {
-      alert('Вы победили');
+
+    if (this.arrForCompare.length % 2 === 1) {
+      return;
     } else {
-      alert('Вы проиграли');
+      let index = this.arrForCompare.length;
+      if (this.arrForCompare[index - 2] !== ___WEBPACK_IMPORTED_MODULE_2__.randomCard[target.name]) {
+        alert('Вы проиграли');
+      }
+    }
+
+    if (this.arrForCompare.length === window.application.difficult) {
+      alert('Вы победили');
+      return;
     }
   }
 }
 
-LevelEasy.levelTemplate = () => ({
+LevelRender.levelTemplate = () => ({
   tag: 'section',
   cls: 'level__easy-screen',
   content: [
@@ -594,7 +606,7 @@ LevelEasy.levelTemplate = () => ({
     },
   ],
 });
-LevelEasy.ShirtBackTemplate = (count) => ({
+LevelRender.ShirtBackTemplate = (count) => ({
   tag: 'img',
   cls: 'img-back',
   attrs: {
@@ -701,7 +713,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "randomCard": () => (/* binding */ randomCard)
 /* harmony export */ });
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
-/* harmony import */ var _classes_levelEasy_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./classes/levelEasy.js */ "./src/classes/levelEasy.js");
+/* harmony import */ var _classes_level_render_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./classes/level-render.js */ "./src/classes/level-render.js");
 /* harmony import */ var _classes_levelHard_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./classes/levelHard.js */ "./src/classes/levelHard.js");
 /* harmony import */ var _classes_levelNormal_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./classes/levelNormal.js */ "./src/classes/levelNormal.js");
 /* harmony import */ var _screens_screen_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./screens/screen.js */ "./src/screens/screen.js");
@@ -724,35 +736,66 @@ let randomCard = [];
 const cards = document.querySelector('.cards');
 const difficulty = document.querySelector('.cards__difficulty');
 const buttonPlayGame = document.querySelector('.cards__start-button');
+const easyDifficulty = difficulty.querySelector('.level-easy');
+const normalDifficulty = difficulty.querySelector('.level-normal');
+const hardDifficulty = difficulty.querySelector('.level-hard');
 
 difficulty.addEventListener('click', (event) => {
   event.preventDefault();
   const target = event.target;
+  console.log(target);
   if (target.dataset.name == 1) {
-    window.application.difficult = 12;
-    window.application.screens['easy'] = _screens_screen_js__WEBPACK_IMPORTED_MODULE_4__.renderScreen;
-    window.application.renderScreen('easy');
+    window.application.difficult = 6;
+    easyDifficulty.setAttribute('style', 'border: 1px solid red');
+    normalDifficulty.removeAttribute('style');
+    hardDifficulty.removeAttribute('style');
+    buttonPlayGame.addEventListener('click', (event) => {
+      event.preventDefault();
+      console.log(target.dataset.name);
+      window.application.screens['easy'] = _screens_screen_js__WEBPACK_IMPORTED_MODULE_4__.renderScreen;
+      window.application.renderScreen('easy');
+    });
   } else if (target.dataset.name == 2) {
-    window.application.difficult = 24;
-    const levelNormal = new _classes_levelNormal_js__WEBPACK_IMPORTED_MODULE_3__.LevelNormal(
-      document.querySelector('.level-normal')
-    );
-    window.application.screens['normal'] = _screens_screen_js__WEBPACK_IMPORTED_MODULE_4__.renderScreen;
-    window.application.renderScreen('normal');
+    window.application.difficult = 12;
+    normalDifficulty.setAttribute('style', 'border: 1px solid red');
+    easyDifficulty.removeAttribute('style');
+    hardDifficulty.removeAttribute('style');
+    buttonPlayGame.addEventListener('click', (event) => {
+      event.preventDefault();
+      console.log(target.dataset.name);
+      window.application.screens['normal'] = _screens_screen_js__WEBPACK_IMPORTED_MODULE_4__.renderScreen;
+      window.application.renderScreen('normal');
+    });
   } else if (target.dataset.name == 3) {
-    const levelHard = new _classes_levelHard_js__WEBPACK_IMPORTED_MODULE_2__.LevelHard(document.querySelector('.level-hard'));
-    window.application.difficult = 36;
-    window.application.screens['hard'] = _screens_screen_js__WEBPACK_IMPORTED_MODULE_4__.renderScreen;
-    window.application.renderScreen('hard');
+    window.application.difficult = 18;
+    hardDifficulty.setAttribute('style', 'border: 1px solid red');
+    normalDifficulty.removeAttribute('style');
+    easyDifficulty.removeAttribute('style');
+    buttonPlayGame.addEventListener('click', (event) => {
+      event.preventDefault();
+      console.log(target.dataset.name);
+      window.application.screens['hard'] = _screens_screen_js__WEBPACK_IMPORTED_MODULE_4__.renderScreen;
+      window.application.renderScreen('hard');
+    });
   }
+  // buttonPlayGame.addEventListener('click', (event) => {
+  //   event.preventDefault();
+  //   console.log(target.dataset.name);
+  //   if (target.dataset.name == 1) {
+  //     window.application.screens['easy'] = renderScreen;
+  //     window.application.renderScreen('easy');
+  //   } else if (target.dataset.name == 2) {
+  //     window.application.screens['normal'] = renderScreen;
+  //     window.application.renderScreen('normal');
+  //   } else if (target.dataset.name == 3) {
+  //     window.application.screens['hard'] = renderScreen;
+  //     window.application.renderScreen('hard');
+  //   }
+  //   // window.application.screens['allScreen'] = renderALLScreen;
+  //   // window.application.renderScreen('allScreen');
+  // });
 });
 
-buttonPlayGame.addEventListener('click', (event) => {
-  event.preventDefault();
-  const target = event.target;
-  window.application.screens['allScreen'] = _screens_screen_js__WEBPACK_IMPORTED_MODULE_4__.renderALLScreen;
-  window.application.renderScreen('allScreen');
-});
 function comparison() {
   function randomCardUniq() {
     const arr = [];
@@ -836,52 +879,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "renderScreen": () => (/* binding */ renderScreen)
 /* harmony export */ });
 /* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../index.js */ "./src/index.js");
-/* harmony import */ var _classes_levelEasy_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../classes/levelEasy.js */ "./src/classes/levelEasy.js");
-/* harmony import */ var _classes_levelHard_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../classes/levelHard.js */ "./src/classes/levelHard.js");
-/* harmony import */ var _classes_levelNormal_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../classes/levelNormal.js */ "./src/classes/levelNormal.js");
-/* harmony import */ var _classes_all_cards_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../classes/all-cards.js */ "./src/classes/all-cards.js");
+/* harmony import */ var _classes_level_render_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../classes/level-render.js */ "./src/classes/level-render.js");
+/* harmony import */ var _classes_all_cards_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../classes/all-cards.js */ "./src/classes/all-cards.js");
 
 
+// import { LevelHard } from '../classes/levelHard.js';
+// import { LevelNormal } from '../classes/levelNormal.js';
 
 
-
-
-function renderScreen(renderType) {
+function renderScreen() {
   _index_js__WEBPACK_IMPORTED_MODULE_0__.cards.textContent = '';
   _index_js__WEBPACK_IMPORTED_MODULE_0__.cards.setAttribute('style', 'display: none');
-  
-  const levelEasy = new _classes_levelEasy_js__WEBPACK_IMPORTED_MODULE_1__.LevelEasy(document.querySelector('.cards'));
-  const levelNormal = new _classes_levelNormal_js__WEBPACK_IMPORTED_MODULE_3__.LevelNormal(document.querySelector('.cards'));
-  const levelHard = new _classes_levelHard_js__WEBPACK_IMPORTED_MODULE_2__.LevelHard(document.querySelector('.cards'));
+
+  const levelRender = new _classes_level_render_js__WEBPACK_IMPORTED_MODULE_1__.LevelRender(document.querySelector('.cards'));
 }
-
-// function renderNormalScreen() {
-//   cards.textContent = '';
-//   const title = document.createElement('div');
-//   title.textContent = 'title placeholder';
-//   const content = document.createElement('div');
-//   content.textContent = 'normal placeholder';
-
-//   cards.appendChild(title);
-//   cards.appendChild(content);
-// }
-
-// function renderHardScreen() {
-//   cards.textContent = '';
-//   const title = document.createElement('div');
-//   title.textContent = 'title placeholder';
-//   const content = document.createElement('div');
-//   content.textContent = 'hard placeholder';
-
-//   cards.appendChild(title);
-//   cards.appendChild(content);
-// }
 
 function renderALLScreen() {
   console.log(_index_js__WEBPACK_IMPORTED_MODULE_0__.cards);
   _index_js__WEBPACK_IMPORTED_MODULE_0__.cards.textContent = '';
   _index_js__WEBPACK_IMPORTED_MODULE_0__.cards.setAttribute('style', 'display: none');
-  const allCards = new _classes_all_cards_js__WEBPACK_IMPORTED_MODULE_4__.AllCards(document.querySelector('.cards'));
+  const allCards = new _classes_all_cards_js__WEBPACK_IMPORTED_MODULE_2__.AllCards(document.querySelector('.cards'));
 }
 
 

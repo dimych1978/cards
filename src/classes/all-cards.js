@@ -8,8 +8,9 @@ export class AllCards {
       console.log(element);
       throw new Error('Это не HTML-элемент');
     }
-    this.element = element;
+    this.element = element; 
     this.renderAllCards = this.renderAllCards.bind(this);
+    console.log('object');
     this.renderAllCards();
   }
   renderAllCards() {
