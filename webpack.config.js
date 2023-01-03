@@ -10,6 +10,7 @@ const mode =
 module.exports = {
   entry: path.join(__dirname, 'src', 'index.js'),
   mode,
+  devtool: 'source-map',
   module: {
     rules: [
       {
