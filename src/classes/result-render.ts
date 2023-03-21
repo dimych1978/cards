@@ -2,16 +2,33 @@ import { templateEngine } from '../lib/template-engine';
 import { reLoad } from '../screens/screen';
 import { LevelRender } from './level-render';
 
+type ResultTemplate = () => {
+  tag: string;
+  cls: string;
+  attrs?: Object;
+};
+
 export class ResultRender {
-  constructor(element) {
+  element: HTMLElement;
+  scoreBoard: Element | undefined;
+  resultRender: Element | undefined;
+  static resultTemplate: ResultTemplate;
+
+  constructor(element: HTMLElement) {
     if (!(element instanceof HTMLElement)) {
       throw new Error('Это не HTML-элемент');
     }
     this.element = element;
-    this.resultRender = this.resultRender.bind(this);
-    this.resultRender();
-    const scoreBoard = document.querySelector('.time__self-data-result');
-    const levelRender = new LevelRender(document.querySelector('.cards'));
+    this.renderResultRender = this.renderResultRender.bind(this);
+    this.renderResultRender();
+    const scoreBoard = document.querySelector(
+      '.time__self-data-result'
+    ) as HTMLElement;
+    const levelRender = new LevelRender(
+      document.querySelector('.cards') as HTMLElement
+    );
+    console.log(levelRender);
+
     scoreBoard.textContent =
       levelRender.time > 60
         ? '0' +
@@ -26,14 +43,16 @@ export class ResultRender {
             ? levelRender.time
             : '0' + (levelRender.time % 10));
     const reStart = document.querySelector('.button__restart');
-    reStart.addEventListener('click', reLoad);
+    reStart?.addEventListener('click', reLoad);
   }
-  resultRender() {
-    this.resultRender = templateEngine(ResultRender.template());
+  renderResultRender() {
+    this.resultRender = templateEngine(
+      ResultRender.resultTemplate()
+    ) as HTMLElement;
     document.body.appendChild(this.resultRender);
   }
 }
-ResultRender.template = () => ({
+ResultRender.resultTemplate = () => ({
   tag: 'section',
   cls: 'cards',
   content: [

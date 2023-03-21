@@ -1,4 +1,4 @@
-export const arrayOfCards = [
+export const arrayOfCards: string[] = [
   'static/img/6_Clubs.svg',
   'static/img/7_Clubs.svg',
   'static/img/8_Clubs.svg',
