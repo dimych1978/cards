@@ -12,7 +12,8 @@
     "lint": "npm run stylelint && npm run stylelint:fix && npm run lint:js",
     "prepare": "husky install",
     "build": "set NODE_ENV=production && webpack",
-    "start": "webpack-dev-server --open"
+    "start": "webpack-dev-server --open",
+    "jest": "jest"
   },
   "keywords": [],
   "author": "",
