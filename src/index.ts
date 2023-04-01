@@ -63,5 +63,4 @@ export function comparison() {
     randomCard = arr;
   }
   randomCardUniq();
-  console.log(randomCard);
 }

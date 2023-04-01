@@ -27,21 +27,22 @@ export class ResultRender {
     const levelRender = new LevelRender(
       document.querySelector('.cards') as HTMLElement
     );
-    console.log(levelRender);
+    const levelRenderTime: number = window.application.time - 1;
+    console.log(levelRenderTime);
 
     scoreBoard.textContent =
-      levelRender.time > 60
+      levelRenderTime > 60
         ? '0' +
-          Math.floor(levelRender.time / 60) +
+          Math.floor(levelRenderTime / 60) +
           ':' +
-          (levelRender.time % 60 > 9
-            ? levelRender.time % 60
-            : '0' + (levelRender.time % 10))
+          (levelRenderTime % 60 > 9
+            ? levelRenderTime % 60
+            : '0' + (levelRenderTime % 10))
         : '00' +
           ':' +
-          (levelRender.time > 9
-            ? levelRender.time
-            : '0' + (levelRender.time % 10));
+          (levelRenderTime > 9
+            ? levelRenderTime
+            : '0' + (levelRenderTime % 10));
     const reStart = document.querySelector('.button__restart');
     reStart?.addEventListener('click', reLoad);
   }

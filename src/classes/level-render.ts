@@ -64,6 +64,7 @@ export class LevelRender {
 
   timer() {
     this.time = window.setTimeout(this.add, 1000);
+    console.log(this.time);
   }
 
   tick() {
@@ -177,6 +178,9 @@ export class LevelRender {
         ) {
           window.application.total = false;
           clearTimeout(this.time);
+                window.application.time = this.time as number;
+
+          console.log(this.time);
           const levelEasyScreen = document.querySelector(
             '.level__easy-screen'
           ) as HTMLElement;
@@ -188,6 +192,8 @@ export class LevelRender {
 
     if (this.arrForCompare.length === window.application.difficult) {
       clearTimeout(this.time);
+      console.log(this.time);
+      window.application.time = this.time as number;
       const levelEasyScreen = document.querySelector(
         '.level__easy-screen'
       ) as HTMLElement;
